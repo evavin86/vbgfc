@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Mini-Course (аналог freeCodeCamp)</title>
+    <style>
+        :root { --primary: #4a90e2; --bg: #f5f7fa; --text: #333; --code-bg: #2d2d2d; }
+        body { font-family: system-ui, -apple-system, sans-serif; margin: 0; background: var(--bg); color: var(--text); }
+        header { padding: 1rem 2rem; background: #fff; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; align-items: center; }
+        nav button { background: none; border: 1px solid var(--primary); color: var(--primary); padding: 0.5rem 1rem; cursor: pointer; border-radius: 4px; }
+        nav button.active { background: var(--primary); color: #fff; }
+        main { padding: 2rem; max-width: 900px; margin: 0 auto; }
+        .lesson { display: none; animation: fadeIn 0.4s ease; }
+        .lesson.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        h2 { color: var(--primary); }
+        pre { background: var(--code-bg); color: #fff; padding: 1rem; border-radius: 6px; overflow-x: auto; }
+        code { font-family: 'Consolas', monospace; }
+        .editor-container { margin-top: 1.5rem; }
+        textarea { width: 100%; height: 200px; background: #1a1a1a; color: #0f0; font-family: monospace; padding: 1rem; border: 1px solid #444; border-radius: 6px; resize: vertical; }
+        button.run { background: #2ecc71; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 0.5rem; }
+        #output { margin-top: 1rem; padding: 1rem; background: #fff; border: 1px solid #ddd; border-radius: 6px; min-height: 60px; white-space: pre-wrap; }
+        .hint { margin-top: 0.5rem; font-size: 0.9rem; color: #666; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Python Mini-Course</h1>
+        <nav>
+            <button onclick="switchLesson(0)" class="active" id="btn-1">Урок 1</button>
+            <button onclick="switchLesson(1)" id="btn-2">Урок 2</button>
+            <button onclick="switchLesson(2)" id="btn-3">Урок 3</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Урок 1 -->
+        <div class="lesson active" id="lesson-1">
+            <h2>Урок 1: Основы синтаксиса и переменные</h2>
+            <p>Python — это интерпретируемый язык. Код выполняется сверху вниз. Переменные создаются присваиванием:</p>
+            <pre><code>name = "Алиса"
+age = 25
+pi = 3.14</code></pre>
+            <p>Типы данных определяются автоматически. Для вывода используем <code>print()</code>:</p>
+            <pre><code>print("Привет,", name)
+print("Тебе", age, "лет")</code></pre>
+            <div class="editor-container">
+                <h3>Попробуй сам</h3>
+                <p>Напиши код, который выводит твоё имя и возраст.</p>
+                <textarea id="code-1">name = "Твое имя"
+age = 0
+print(f"Меня зовут {name}, мне {age} лет")</textarea>
+                <button class="run" onclick="runCode('code-1', 'output-1')">Запустить</button>
+                <div id="output-1"></div>
+            </div>
+        </div>
+
+        <!-- Урок 2 -->
+        <div class="lesson" id="lesson-2">
+            <h2>Урок 2: Условия и циклы</h2>
+            <p>Условные конструкции в Python используют отступы вместо скобок:</p>
+            <pre><code>x = 10
+if x > 5:
+    print("x больше 5")
+else:
+    print("x меньше или равно 5")</code></pre>
+            <p>Цикл <code>for</code> перебирает элементы:</p>
+            <pre><code>numbers = [1, 2, 3, 4, 5]
+for n in numbers:
+    if n % 2 == 0:
+        print(n, "— чётное")</code></pre>
+            <div class="editor-container">
+                <h3>Практика</h3>
+                <p>Выведи все числа от 1 до 10, которые делятся на 3.</p>
+                <textarea id="code-2">for i in range(1, 11):
+    if i % 3 == 0:
+        print(i)</textarea>
+                <button class="run" onclick="runCode('code-2', 'output-2')">Запустить</button>
+                <div id="output-2"></div>
+            </div>
+        </div>
+
+        <!-- Урок 3 -->
+        <div class="lesson" id="lesson-3">
+            <h2>Урок 3: Функции и работа со строками</h2>
+            <p>Функции объявляются через <code>def</code>. Они могут принимать аргументы и возвращать значения:</p>
+            <pre><code>def greet(name):
+    return f"Привет, {name}!"
+
+message = greet("Мир")
+print(message)</code></pre>
+            <p>Со строками удобно работать через методы:</p>
+            <pre><code>text = "python"
+print(text.upper())      # PYTHON
+print(text.capitalize()) # Python</code></pre>
+            <div class="editor-container">
+                <h3>Задание</h3>
+                <p>Создай функцию <code>count_vowels(text)</code>, которая считает количество гласных в строке.</p>
+                <textarea id="code-3">def count_vowels(text):
+    vowels = "аеёиоуыэюя"
+    count = 0
+    for char in text.lower():
+        if char in vowels:
+            count += 1
+    return count
+
+print(count_vowels("Привет, мир!"))</textarea>
+                <button class="run" onclick="runCode('code-3', 'output-3')">Запустить</button>
+                <div id="output-3"></div>
+                <p class="hint">Подсказка: используй цикл и проверку вхождения символа в строку гласных.</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Простой интерпретатор на базе Pyodide (запускает настоящий Python в браузере)
+        let pyodideLoaded = false;
+        const loadPyodide = async () => {
+            if (pyodideLoaded) return;
+            const pyodide = await import('https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js');
+            await pyodide.loadPyodide();
+            pyodideLoaded = true;
+            console.log('Pyodide загружен');
+        };
+
+        window.runCode = async (textareaId, outputId) => {
+            await loadPyodide();
+            const code = document.getElementById(textareaId).value;
+            const outputEl = document.getElementById(outputId);
+            outputEl.textContent = 'Выполнение...';
+            try {
+                const pyodide = await globalThis.pyodide;
+                // Перенаправляем print в наш элемент
+                pyodide.runPython(`
+import sys
+class CaptureOutput:
+    def __init__(self): self.buffer = ""
+    def write(self, s): self.buffer += s
+    def flush(self): pass
+    def getvalue(self): return self.buffer
+
+sys.stdout = CaptureOutput()
+sys.stderr = CaptureOutput()
+`);
+                pyodide.runPython(code);
+                const result = pyodide.runPython('sys.stdout.getvalue()');
+                outputEl.textContent = result || '(код выполнен, но ничего не вывел)';
+            } catch (e) {
+                outputEl.textContent = 'Ошибка:\n' + e.toString();
+            }
+        };
+
+        window.switchLesson = (index) => {
+            document.querySelectorAll('.lesson').forEach((l, i) => {
+                l.classList.toggle('active', i === index);
+            });
+            document.querySelectorAll('nav button').forEach((b, i) => {
+                b.classList.toggle('active', i === index);
+            });
+        };
+    </script>
+</body>
+</html>
